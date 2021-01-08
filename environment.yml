@@ -1,0 +1,10 @@
+name: da-tp-sw
+channels:
+  - defaults
+dependencies:
+  - jupyter
+  - numpy
+  - matplotlib
+  - tqdm
+  - numba
+  - seaborn
