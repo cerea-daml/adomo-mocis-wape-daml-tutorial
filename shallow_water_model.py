@@ -125,7 +125,7 @@ class ShallowWaterModel:
 
         Returns
         -------
-        state : ShallowWaterState instance 
+        state : ShallowWaterState
             The new model state.
         """
         ic = (self.Nx-1) // 2
@@ -161,7 +161,7 @@ class ShallowWaterModel:
 
         Returns
         -------
-        ensemble : ShallowWaterEnsembleState instance
+        ensemble : ShallowWaterEnsembleState
             The new ensemble of model states.
         """
         ic = (self.Nx-1) // 2
@@ -184,7 +184,7 @@ class ShallowWaterModel:
 
         Arguments
         ---------
-        state : ShallowWaterState instance
+        state : ShallowWaterState
             The model state to integrate.
         """
         shallow_water_forward(self.Nx, 
@@ -205,7 +205,7 @@ class ShallowWaterModel:
 
         Arguments
         ---------
-        ensemble : ShallowWaterEnembleState instance
+        ensemble : ShallowWaterEnembleState
             The ensemble of model states to integrate.
         """
         for i in range(ensemble.Ne):
@@ -309,4 +309,453 @@ def _compute_flux(g, h, u):
     fh = h*u
     fu = h*u**2 + 0.5*g*h**2
     return (fh, fu)
+
+def make_fancy_animation_h(trajs_h,
+                           title,
+                           palette=None,
+                           Nx=100,
+                           x_min=0,
+                           x_max=100,
+                           y_min=0.99,
+                           y_max=1.08,
+                           Nt=500,
+                           freq=10,
+                           interval=75):
+    r"""Make an animation of water height.
+
+    Arguments
+    ---------
+    trajs_h : list
+        The list of trajectories to plot. Each element is
+        a tuple (label, data) where label is a string,
+        the label to print, and data is the numpy array
+        containing the trajectory \(h(t)\) to plot.
+    title : string
+        The title of the animation.
+    palette : list, optional
+        The color palette. Defaults to seaborn's deep palette.
+    Nx : int, optional
+        The number of grid points.
+    x_min : float, optional
+        The lower limit for the x-axis.
+    x_max : float, optional
+        The upper limit for the x-axis.
+    y_min : float, optional
+        The lower limit for the y-axis.
+    y_max : float, optional
+        The upper limit for the y-axis.
+    Nt : int, optional
+        The number of time steps to animate.
+    freq : int, optional
+        The time frequency for animation frames.
+    interval : int, optional
+        The time delay between frames in milliseconds.
+
+    Returns
+    -------
+    anim : matplotlib.animation.FuncAnimation
+        The fancy animation.
+    """
+
+    from matplotlib import pyplot as plt
+    from matplotlib import animation
+    import seaborn as sns
+
+    if palette is None:
+        palette = sns.color_palette('deep')
+
+    fig = plt.figure(figsize=(12, 6))
+    ax = plt.gca()
+    ax.set_xlim(x_min, x_max)
+    ax.set_ylim(y_min, y_max)
+    ax.set_xlabel('Domain')
+    ax.set_ylabel('Water height')
+    ax.set_title(title)
+
+    lines = []
+    for (i, (lbl, traj)) in enumerate(trajs_h):
+        line, = ax.plot([], [], c=palette[i], label=lbl)
+        lines.append(line)
+    plt.legend()
+    x = np.arange(Nx+1)
+
+    def animate(t):
+        for (i, (lbl, traj)) in enumerate(trajs_h):
+            lines[i].set_data(x, traj[t])
+        return tuple(lines)
+
+    frames = range(0, Nt+1, freq)
+    anim = animation.FuncAnimation(fig, animate, frames=frames, 
+                                   interval=interval, blit=True)
+    plt.close(fig)
+    return anim
+
+def make_fancy_animation_u(trajs_u,
+                           title,
+                           palette=None,
+                           Nx=100,
+                           x_min=0,
+                           x_max=100,
+                           y_min=-0.2,
+                           y_max=0.2,
+                           Nt=500,
+                           freq=10,
+                           interval=75):
+    r"""Make an animation of horizontal velocity.
+
+    Arguments
+    ---------
+    trajs_u : list
+        The list of trajectories to plot. Each element is
+        a tuple (label, data) where label is a string,
+        the label to print, and data is the numpy array
+        containing the trajectory \(u(t)\) to plot.
+    title : string
+        The title of the animation.
+    palette : list, optional
+        The color palette. Defaults to seaborn's deep palette.
+    Nx : int, optional
+        The number of grid points.
+    x_min : float, optional
+        The lower limit for the x-axis.
+    x_max : float, optional
+        The upper limit for the x-axis.
+    y_min : float, optional
+        The lower limit for the y-axis.
+    y_max : float, optional
+        The upper limit for the y-axis.
+    Nt : int, optional
+        The number of time steps to animate.
+    freq : int, optional
+        The time frequency for animation frames.
+    interval : int, optional
+        The time delay between frames in milliseconds.
+
+    Returns
+    -------
+    anim : matplotlib.animation.FuncAnimation
+        The fancy animation.
+    """
+
+    from matplotlib import pyplot as plt
+    from matplotlib import animation
+    import seaborn as sns
+
+    if palette is None:
+        palette = sns.color_palette('deep')
+
+    fig = plt.figure(figsize=(12, 6))
+    ax = plt.gca()
+    ax.set_xlim(x_min, x_max)
+    ax.set_ylim(y_min, y_max)
+    ax.set_xlabel('Domain')
+    ax.set_ylabel('Horizontal velocity')
+    ax.set_title(title)
+
+    lines = []
+    for (i, (lbl, traj)) in enumerate(trajs_u):
+        line, = ax.plot([], [], c=palette[i], label=lbl)
+        lines.append(line)
+    plt.legend()
+    x = np.arange(Nx+1)
+
+    def animate(t):
+        for (i, (lbl, traj)) in enumerate(trajs_u):
+            lines[i].set_data(x, traj[t])
+        return tuple(lines)
+
+    frames = range(0, Nt+1, freq)
+    anim = animation.FuncAnimation(fig, animate, frames=frames, 
+                                   interval=interval, blit=True)
+    plt.close(fig)
+    return anim
+
+def plot_time_series_h(trajs,
+                       title,
+                       palette=None,
+                       y_min=0.99,
+                       y_max=1.08,
+                       dt=0.03,
+                       Nt=500):
+    """Make a time series plot for water height.
+
+    Arguments
+    ---------
+    trajs : list
+        The list of trajectories to plot. Each element is
+        a tuple (label, data) where label is a string,
+        the label to print, and data is the numpy array
+        containing the trajectory \(h(t)\) to plot.
+    title : string
+        The title of the animation.
+    palette : list, optional
+        The color palette. Defaults to seaborn's deep palette.
+    y_min : float, optional
+        The lower limit for the y-axis.
+    y_max : float, optional
+        The upper limit for the y-axis.
+    dt : float, optional
+        The integration time step.
+    Nt : int, optional
+        The number of time steps to animate.
+    """
+
+    from matplotlib import pyplot as plt
+    import seaborn as sns
+
+    time = dt * np.arange(Nt+1)
+    if palette is None:
+        palette = sns.color_palette('deep')
+
+    fig = plt.figure(figsize=(12, 6))
+    ax = plt.gca()
+    ax.set_xlim(time[0], time[-1])
+    ax.set_ylim(y_min, y_max)
+    ax.set_xlabel('Time')
+    ax.set_ylabel('Water height')
+    ax.set_title(title)
+    for (i, (lbl, traj)) in enumerate(trajs):
+        ax.plot(time, traj, c=palette[i], label=lbl)
+    plt.legend()
+
+def plot_time_series_mae(trajs,
+                         title,
+                         palette=None,
+                         y_min=0,
+                         y_max=0.01,
+                         dt=0.03,
+                         Nt=500):
+    """Make a time series plot for MAE.
+
+    Arguments
+    ---------
+    trajs : list
+        The list of trajectories to plot. Each element is
+        a tuple (label, data) where label is a string,
+        the label to print, and data is the numpy array
+        containing the trajectory \(h(t)\) to plot.
+    title : string
+        The title of the animation.
+    palette : list, optional
+        The color palette. Defaults to seaborn's deep palette.
+    y_min : float, optional
+        The lower limit for the y-axis.
+    y_max : float, optional
+        The upper limit for the y-axis.
+    dt : float, optional
+        The integration time step.
+    Nt : int, optional
+        The number of time steps to animate.
+    """
+
+    from matplotlib import pyplot as plt
+    import seaborn as sns
+
+    time = dt * np.arange(Nt+1)
+    if palette is None:
+        palette = sns.color_palette('deep')
+
+    fig = plt.figure(figsize=(12, 6))
+    ax = plt.gca()
+    ax.set_xlim(time[0], time[-1])
+    ax.set_ylim(y_min, y_max)
+    ax.set_xlabel('Time')
+    ax.set_ylabel('MAE')
+    ax.set_title(title)
+    for (i, (lbl, traj)) in enumerate(trajs):
+        ax.plot(time, traj, c=palette[i], label=lbl)
+    plt.legend()
+
+def plot_time_series_rmse(trajs,
+                         title,
+                         palette=None,
+                         y_min=0,
+                         y_max=0.02,
+                         dt=0.03,
+                         Nt=500):
+    """Make a time series plot for RMSE.
+
+    Arguments
+    ---------
+    trajs : list
+        The list of trajectories to plot. Each element is
+        a tuple (label, data) where label is a string,
+        the label to print, and data is the numpy array
+        containing the trajectory \(h(t)\) to plot.
+    title : string
+        The title of the animation.
+    palette : list, optional
+        The color palette. Defaults to seaborn's deep palette.
+    y_min : float, optional
+        The lower limit for the y-axis.
+    y_max : float, optional
+        The upper limit for the y-axis.
+    dt : float, optional
+        The integration time step.
+    Nt : int, optional
+        The number of time steps to animate.
+    """
+
+    from matplotlib import pyplot as plt
+    import seaborn as sns
+
+    time = dt * np.arange(Nt+1)
+    if palette is None:
+        palette = sns.color_palette('deep')
+
+    fig = plt.figure(figsize=(12, 6))
+    ax = plt.gca()
+    ax.set_xlim(time[0], time[-1])
+    ax.set_ylim(y_min, y_max)
+    ax.set_xlabel('Time')
+    ax.set_ylabel('RMSE')
+    ax.set_title(title)
+    for (i, (lbl, traj)) in enumerate(trajs):
+        ax.plot(time, traj, c=palette[i], label=lbl)
+    plt.legend()
+
+def make_fancy_animation_h_ensemble(trajs_h,
+                                    trajs_E,
+                                    title,
+                                    palette=None,
+                                    Nx=100,
+                                    x_min=0,
+                                    x_max=100,
+                                    y_min=0.99,
+                                    y_max=1.08,
+                                    Nt=500,
+                                    freq=10,
+                                    interval=75):
+    r"""Make an animation of water height.
+
+    Arguments
+    ---------
+    trajs_h : list
+        The list of trajectories to plot. Each element is
+        a tuple (label, data) where label is a string,
+        the label to print, and data is the numpy array
+        containing the trajectory \(h(t)\) to plot.
+    trajs_E : list
+        The list of ensemble members to plot.
+    title : string
+        The title of the animation.
+    palette : list, optional
+        The color palette. Defaults to seaborn's deep palette.
+    Nx : int, optional
+        The number of grid points.
+    x_min : float, optional
+        The lower limit for the x-axis.
+    x_max : float, optional
+        The upper limit for the x-axis.
+    y_min : float, optional
+        The lower limit for the y-axis.
+    y_max : float, optional
+        The upper limit for the y-axis.
+    Nt : int, optional
+        The number of time steps to animate.
+    freq : int, optional
+        The time frequency for animation frames.
+    interval : int, optional
+        The time delay between frames in milliseconds.
+
+    Returns
+    -------
+    anim : matplotlib.animation.FuncAnimation
+        The fancy animation.
+    """
+
+    from matplotlib import pyplot as plt
+    from matplotlib import animation
+    import seaborn as sns
+
+    if palette is None:
+        palette = sns.color_palette('deep')
+
+    fig = plt.figure(figsize=(12, 6))
+    ax = plt.gca()
+    ax.set_xlim(x_min, x_max)
+    ax.set_ylim(y_min, y_max)
+    ax.set_xlabel('Domain')
+    ax.set_ylabel('Water height')
+    ax.set_title(title)
+
+    lines = []
+    lines_E = []
+    for traj in trajs_E:
+        line, = ax.plot([], [], c=palette[len(trajs_h)], lw=0.25)
+        lines_E.append(line)
+    for (i, (lbl, traj)) in enumerate(trajs_h):
+        line, = ax.plot([], [], c=palette[i], label=lbl)
+        lines.append(line)
+    plt.legend()
+    x = np.arange(Nx+1)
+
+    def animate(t):
+        for (line, traj) in zip(lines_E, trajs_E):
+            line.set_data(x, traj[t])
+        for (i, (lbl, traj)) in enumerate(trajs_h):
+            lines[i].set_data(x, traj[t])
+        return tuple(lines_E+lines)
+
+    frames = range(0, Nt+1, freq)
+    anim = animation.FuncAnimation(fig, animate, frames=frames, 
+                                   interval=interval, blit=True)
+    plt.close(fig)
+    return anim
+
+def make_fancy_animation_B(traj_B,
+                           title,
+                           cmap=None,
+                           vmax=5e-5,
+                           Nt=500,
+                           freq=10,
+                           interval=75):
+    """Make an animation of B matrix.
+
+    Arguments
+    ---------
+    trajs_B : numpy array
+        The trajectories of B to plot.
+    title : string
+        The title of the animation.
+    cmap : string, optional
+        The color map. Defaults to custom RdBu cmap.
+    v_max : float, optional
+        The upper limit for the z-axis.
+    Nt : int, optional
+        The number of time steps to animate.
+    freq : int, optional
+        The time frequency for animation frames.
+    interval : int, optional
+        The time delay between frames in milliseconds.
+
+    Returns
+    -------
+    anim : matplotlib.animation.FuncAnimation
+        The fancy animation.
+    """
+
+    from matplotlib import pyplot as plt
+    from matplotlib import animation
+    import seaborn as sns
+
+    if cmap is None:
+        cmap = sns.diverging_palette(240, 10, as_cmap=True)
+
+    fig = plt.figure(figsize=(12, 6))
+    ax = plt.gca()
+    ax.grid(False)
+    ax.set_title(title)
+    im = ax.imshow(traj_B[0], vmin=-vmax, vmax=vmax, cmap=cmap)
+    plt.colorbar(im)
+
+    def animate(t):
+        im.set_array(traj_B[t])
+        return (im,)
+
+    frames = range(0, Nt+1, freq)
+    anim = animation.FuncAnimation(fig, animate, frames=frames, 
+                                   interval=interval, blit=True)
+    plt.close(fig)
+    return anim
 
