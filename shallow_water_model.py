@@ -17,7 +17,7 @@ The boundary conditions are the following:
 
 The equations are solved by the `shallow_water_forward` function using 
 numerical schemes detailed by, e.g., [Honnorat, 2007](https://tel.archives-ouvertes.fr/tel-00273318) 
-and originally implemented by [V. Mallet](mailto:vivien.mallet@inria.fr). 
+and originally implemented by [Vivien Mallet](mailto:vivien.mallet@inria.fr). 
 The `ShallowWaterModel` class defines a user-friendly object-oriented 
 interface to the `shallow_water_forward` function and can be used as follows.
 
