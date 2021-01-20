@@ -16,7 +16,7 @@ Clone the repertory with HTTPS (cloning with SSH is not allowed outside ENPC).
 
     $ git clone https://gitlab.enpc.fr/alban.farchi/tp-data-assimilation.git
 
-Create a dedicated anaconda environment for the sessions:
+Go to the repertory. Once there, create a dedicated anaconda environment for the sessions:
 
     $ conda env create -f environment.yml
 
@@ -27,6 +27,10 @@ Activate the newly created environment:
 [Optional] Update the environment:
 
     $ conda update --all
+
+[Optional] Test the environment (this may take up to one minute):
+
+    $ python test_import.py
 
 Open the notebook and follow the instructions:
 
