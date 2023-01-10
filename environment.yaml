@@ -2,9 +2,10 @@ name: da-tp-sw
 channels:
   - defaults
 dependencies:
-  - jupyter
+  - jupyter lab
   - numpy
   - matplotlib
   - tqdm
   - numba
   - seaborn
+  - ipywidgets

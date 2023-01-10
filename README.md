@@ -18,7 +18,7 @@ Clone the repertory with HTTPS (cloning with SSH is not allowed outside ENPC).
 
 Go to the repertory. Once there, create a dedicated anaconda environment for the sessions:
 
-    $ conda env create -f environment.yml
+    $ conda env create -f environment.yaml
 
 Activate the newly created environment:
 
@@ -32,6 +32,6 @@ Activate the newly created environment:
 
     $ python test_import.py
 
-Open the notebook and follow the instructions:
+Open the notebook (e.g. with Jupyter) and follow the instructions:
 
     $ jupyter-notebook tp-shallow-water.ipynb

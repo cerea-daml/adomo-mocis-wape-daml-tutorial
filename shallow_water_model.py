@@ -138,7 +138,8 @@ class ShallowWaterModel:
     def new_ensemble_crenel(self, 
                             Ne,
                             mean_h_anom=0, 
-                            std_h_anom=0.02, 
+                            std_h_anom=0.02,
+                            seed=None,
                             debias=True):
         """Create an ensemble of model states.
 
@@ -155,6 +156,8 @@ class ShallowWaterModel:
             The average water anomaly in the ensemble.
         std_h_anom : real, optional
             The standard deviation of water anomaly in the ensemble.
+        seed : int, optional
+            The random seed.
         debias : boolean, optional
             If True, the sample mean of `h_anom` is corrected to be
             exactly `mean_h_anom`.
@@ -164,10 +167,11 @@ class ShallowWaterModel:
         ensemble : ShallowWaterEnsembleState
             The new ensemble of model states.
         """
+        rng = np.random.default_rng(seed=seed)
         ic = (self.Nx-1) // 2
         i_min = max(ic-5, 0)
         i_max = min(ic+5, self.Nx-1)
-        h_anom = np.random.randn(Ne)
+        h_anom = rng.standard_normal(size=Ne)
         if debias:
             h_anom -= h_anom.mean()
         h_anom = mean_h_anom + std_h_anom * h_anom
