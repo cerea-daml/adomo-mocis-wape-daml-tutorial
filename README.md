@@ -12,9 +12,11 @@ by Marc Bocquet.
 
 ## Installation
 
-Clone the repertory with HTTPS (cloning with SSH is not allowed outside ENPC).
+Install conda, for example through [miniconda](https://docs.conda.io/en/latest/miniconda.html) or through [mamba](https://mamba.readthedocs.io/en/latest/installation.html).
 
-    $ git clone https://gitlab.enpc.fr/alban.farchi/tp-data-assimilation.git
+Clone the repertory:
+
+    $ git clone git@github.com:cerea-daml/adomo-mocis-wape-daml-tutorial.git
 
 Go to the repertory. Once there, create a dedicated anaconda environment for the sessions:
 
@@ -22,7 +24,7 @@ Go to the repertory. Once there, create a dedicated anaconda environment for the
 
 Activate the newly created environment:
 
-    $ conda activate da-tp-sw
+    $ conda activate tutorial
 
 [Optional] Update the environment:
 
@@ -34,4 +36,5 @@ Activate the newly created environment:
 
 Open the notebook (e.g. with Jupyter) and follow the instructions:
 
-    $ jupyter-notebook tp-shallow-water.ipynb
+    $ jupyter-notebook tutorial.ipynb
+

@@ -1,11 +1,11 @@
-name: da-tp-sw
+name: tutorial
 channels:
   - defaults
 dependencies:
-  - jupyter lab
   - numpy
-  - matplotlib
-  - tqdm
   - numba
+  - matplotlib
   - seaborn
+  - tqdm
+  - jupyterlab
   - ipywidgets
