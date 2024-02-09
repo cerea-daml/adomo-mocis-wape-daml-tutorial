@@ -1,0 +1,11 @@
+name: tutorial
+channels:
+  - defaults
+dependencies:
+  - numpy
+  - numba
+  - matplotlib
+  - seaborn
+  - tqdm
+  - jupyterlab
+  - ipywidgets
