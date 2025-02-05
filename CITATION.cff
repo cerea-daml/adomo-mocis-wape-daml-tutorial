@@ -1,13 +1,16 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
+- family-names: "Tobias"
+  given-names: "Finn"
+  orcid: "https://orcid.org/0000-0001-9585-8349"
 - family-names: "Farchi"
   given-names: "Alban"
   orcid: "https://orcid.org/0000-0002-4162-8289"
 - family-names: "Bocquet"
   given-names: "Marc"
 title: "Practical sessions of data assimilation with a shallow water model."
-version: 1.0.0
+version: 1.1.0
 doi: 10.5281/zenodo.10478753
-date-released: 2024-01-10
+date-released: 2025-02-04
 url: "https://github.com/cerea-daml/adomo-mocis-wape-daml-tutorial"
