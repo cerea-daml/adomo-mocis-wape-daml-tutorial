@@ -33,7 +33,7 @@ Install conda, for example through [miniconda](https://docs.conda.io/en/latest/m
 
 Clone the repertory:
 
-    $ git clone git@github.com:cerea-daml/2025-teaching-practical.git
+    $ git clone git@github.com:cerea-daml/adomo-mocis-wape-daml-tutorial.git
 
 Go to the repertory. Once there, create a dedicated anaconda environment for the sessions:
 
