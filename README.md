@@ -18,7 +18,7 @@ by Marc Bocquet.
 
 ## Installation
 
-You have two options to execute the `tutorial.ipynb`: you could either use Google Colab or you could install it locally.
+You have two options to execute the `tutorial_TODO.ipynb` and `Advanced_tutorial_TODO.ipynb`: you could either use Google Colab or you could install it locally.
 
 
 ### Google Colab
