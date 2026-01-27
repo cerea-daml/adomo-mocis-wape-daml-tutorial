@@ -2,11 +2,15 @@
 
 ##### Tobias Finn, CEREA, [tobias.finn@enpc.fr](mailto:tobias.finn@enpc.fr)
 
+##### Sibo Cheng, CEREA, [sibo.cheng@enpc.fr](mailto:sibo.cheng@enpc.fr)
+
 [![DOI](https://zenodo.org/badge/590754159.svg)](https://zenodo.org/doi/10.5281/zenodo.10478752)
 
 During these sessions, you will apply two classical data assimilation methods 
 to a shallow water model. The objective for you is to better understand these 
 methods, figure out their practical implementations and identify their key parameters.
+
+The Advanced tutorial, which consists of training a surrogate neural network model and performing parameter calibration using 3D-Var, will not be considered in the course evaluation.
 
 These practical sessions, originally designed by Vivien Mallet and Alban Farchi , are part of the 
 [data assimilation course](http://cerea.enpc.fr/HomePages/bocquet/teaching/) 
@@ -19,9 +23,13 @@ You have two options to execute the `tutorial.ipynb`: you could either use Googl
 
 ### Google Colab
 
-To use the notebook with the shared resources from Google Colab, you need a Google account.
+To use the tutorial_TODO notebook with the shared resources from Google Colab, you need a Google account.
 
 Click on: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/109XR3-gc4s4sOZcdy4NF3sf87o16a2EI?usp=sharing)
+
+To use the tutorial_advanced_TODO notebook with the shared resources from Google Colab, 
+
+Click on: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1OYncYBmM05p_mmVPcRNMMPHmgsYx_P7Z?usp=sharing)
 
 For that notebook, you have only reading rights. To execute the notebook, you need to save the notebook in your own Google Drive: `File -> Save a copy in Drive`, a new tab will open with the copied notebook.
 
