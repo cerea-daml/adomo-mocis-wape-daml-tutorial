@@ -25,11 +25,11 @@ You have two options to execute the `tutorial_TODO.ipynb` and `Advanced_tutorial
 
 To use the tutorial_TODO notebook with the shared resources from Google Colab, you need a Google account.
 
-Click on: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/109XR3-gc4s4sOZcdy4NF3sf87o16a2EI?usp=sharing)
+Click on: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1fAoNsHphKx8NXIwi1b6SdUnERxcG1ATq?usp=sharing)
 
 To use the Advanced_tutorial_TODO notebook with the shared resources from Google Colab, 
 
-Click on: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1OYncYBmM05p_mmVPcRNMMPHmgsYx_P7Z?usp=sharing)
+Click on: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Kg9wAgJLeJZC4qVDBroObfa152Mdm6S1?usp=sharing)
 
 For that notebook, you have only reading rights. To execute the notebook, you need to save the notebook in your own Google Drive: `File -> Save a copy in Drive`, a new tab will open with the copied notebook.
 
