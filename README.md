@@ -27,7 +27,7 @@ To use the tutorial_TODO notebook with the shared resources from Google Colab, y
 
 Click on: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/109XR3-gc4s4sOZcdy4NF3sf87o16a2EI?usp=sharing)
 
-To use the tutorial_advanced_TODO notebook with the shared resources from Google Colab, 
+To use the Advanced_tutorial_TODO notebook with the shared resources from Google Colab, 
 
 Click on: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1OYncYBmM05p_mmVPcRNMMPHmgsYx_P7Z?usp=sharing)
 
