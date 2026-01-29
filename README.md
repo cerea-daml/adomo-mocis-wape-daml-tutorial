@@ -61,5 +61,5 @@ Activate the newly created environment:
 
 Open the notebook (e.g. with Jupyter) and follow the instructions:
 
-    $ jupyter-notebook tutorial.ipynb
+    $ jupyter-notebook tutorial_TODO.ipynb
 
