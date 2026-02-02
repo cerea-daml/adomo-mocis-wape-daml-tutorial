@@ -41,7 +41,7 @@ Install conda, for example through [miniconda](https://docs.conda.io/en/latest/m
 
 Clone the repertory:
 
-    $ git clone git@github.com:cerea-daml/adomo-mocis-wape-daml-tutorial.git
+    $ git clone https://github.com/cerea-daml/adomo-mocis-wape-daml-tutorial.git
 
 Go to the repertory. Once there, create a dedicated anaconda environment for the sessions:
 
@@ -58,6 +58,10 @@ Activate the newly created environment:
 [Optional] Test the environment (this may take up to one minute):
 
     $ python test_import.py
+
+Install the Jupyter notebook
+
+    $ conda install notebook
 
 Open the notebook (e.g. with Jupyter) and follow the instructions:
 
